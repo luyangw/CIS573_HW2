@@ -4,50 +4,43 @@ import java.awt.event.*;
 import java.io.*;
 import javax.sound.sampled.*;
 
-public class GUI_Winner implements ActionListener
+public class GUI_Winner extends GUI implements ActionListener
 {
-    private JFrame parentFrame;
-    private JFrame congratulationsFrame;
-    private JLabel answerLabel;
-    private JLabel secretWordLabel;
-    private JLabel gameResultLabel;
-    private JButton returnBtn;
-    private ImageIcon background;
-    private JPanel imagePanel;
-    
+	
     public GUI_Winner(String Letters,JFrame frame)
     {
-        parentFrame = frame;
-        congratulationsFrame = new JFrame("You are the winner!!!");
-        bg(congratulationsFrame);
-        answerLabel = new JLabel("The answer is ");
+    	super(Letters, frame);
+    	parentFrame = frame;
+        resultFrame.setTitle("You are the winner!!!");
+        bg(resultFrame);
+        JLabel answerLabel = new JLabel("The answer is ");
         
-        secretWordLabel = new JLabel(Letters);
+        secretWordLabel.setText(Letters);
         secretWordLabel.setFont(new Font("Default",Font.PLAIN,23));
         secretWordLabel.setForeground(Color.red);
-        gameResultLabel = new JLabel("You are winner!");
-        returnBtn = new JButton("Return to the main menu");
+        gameResultLabel.setText("You are winner!");
+        //returnBtn = new JButton("Return to the main menu");
 
-        returnBtn.addActionListener(this); 
+        //returnBtn.addActionListener(this); 
         
-        congratulationsFrame.add(answerLabel);
-        congratulationsFrame.add(secretWordLabel);
-        congratulationsFrame.add(gameResultLabel);
-        congratulationsFrame.add(returnBtn);
+        resultFrame.add(answerLabel);
+        resultFrame.add(secretWordLabel);
+        resultFrame.add(gameResultLabel);
+        resultFrame.add(returnBtn);
 
-        congratulationsFrame.setVisible(true);
+        //congratulationsFrame.setVisible(true);
 
     }
 
     public void bg(JFrame frame)
     {
-        background = new ImageIcon("Congrats.gif");
+        ImageIcon background = new ImageIcon("Congrats.gif");
         JLabel label = new JLabel(background);
      
         label.setBounds(0, 0, background.getIconWidth(),
             background.getIconHeight());
    
-        imagePanel = (JPanel) frame.getContentPane();
+        JPanel imagePanel = (JPanel) frame.getContentPane();
         imagePanel.setOpaque(false);
 
         imagePanel.setLayout(new FlowLayout());
@@ -61,10 +54,12 @@ public class GUI_Winner implements ActionListener
 
     }
 
+    /*
     public void actionPerformed(ActionEvent e)
     {
-        congratulationsFrame.dispose();
+    	//congratulationsFrame.dispose();
         parentFrame.dispose();
     	new Start().createAndShowGUI();
     }
+    */
 }
